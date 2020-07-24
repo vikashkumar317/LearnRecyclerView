@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/birdImageView"
+        android:layout_width="130dp"
+        android:layout_height="100dp"
+        android:src="@drawable/bird"
+        android:scaleType="centerCrop"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/nameTextView"
+            android:textSize="20dp"
+            android:singleLine="true"
+            android:textStyle="bold"
+            android:text="NAME"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dobTextView"
+            android:singleLine="true"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="DOB"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/addressTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="ADDRESS"
+                android:layout_toLeftOf="@id/singleCheckBox"
+                android:textSize="20dp"
+                />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/starStyle"
+                android:id="@+id/singleCheckBox"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"/>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
