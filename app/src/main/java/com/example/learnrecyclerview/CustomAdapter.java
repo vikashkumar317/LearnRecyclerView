@@ -10,15 +10,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.bumptech.glide.Glide;
+
+import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHoder>{
-    private final ArrayList<Info> mInfoList;
+    private List<Hero> mHeroes;
     private LayoutInflater mInflater;
 
-    public CustomAdapter(Context context, ArrayList<Info> infoList) {
+    public CustomAdapter(Context context, List<Hero> heroes) {
         mInflater = LayoutInflater.from(context);
-        mInfoList = infoList;
+        mHeroes = heroes;
     }
 
     @Override
@@ -29,28 +31,31 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
     @Override
     public void onBindViewHolder(@NonNull CustomAdapter.CustomViewHoder holder, int position) {
-        Info current = mInfoList.get(position);
+        Hero current = mHeroes.get(position);
         holder.nameView.setText(current.getName());
-        holder.dobView.setText(current.getDob());
-        holder.addressView.setText(current.getAddress());
+        holder.teamView.setText(current.getTeam());
+        holder.publisherView.setText(current.getPublisher());
+        holder.numberView.setText(Integer.toString(position+1));
+        Glide.with(holder.heroImageView.getContext()).load(current.getImageurl()).into(holder.heroImageView);
     }
 
     @Override
     public int getItemCount() {
-        return mInfoList.size();
+        return mHeroes.size();
     }
 
     public class CustomViewHoder extends RecyclerView.ViewHolder {
-        public final TextView nameView, dobView, addressView;
-        public final ImageView imageView;
+        public final TextView nameView, teamView, publisherView, numberView;
+        public final ImageView heroImageView;
         final CustomAdapter mAdapter;
 
         public CustomViewHoder(@NonNull View itemView, CustomAdapter adapter) {
             super(itemView);
             nameView = itemView.findViewById(R.id.nameTextView);
-            dobView = itemView.findViewById(R.id.dobTextView);
-            addressView = itemView.findViewById(R.id.addressTextView);
-            imageView = itemView.findViewById(R.id.birdImageView);
+            teamView = itemView.findViewById(R.id.teamTextView);
+            publisherView = itemView.findViewById(R.id.publisherTextView);
+            heroImageView = itemView.findViewById(R.id.heroImageView);
+            numberView = itemView.findViewById(R.id.numberTextView);
             this.mAdapter = adapter;
         }
     }

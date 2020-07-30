@@ -6,55 +6,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
-import java.util.ArrayList;
+import java.util.List;
 
-class Info{
-    private String name;
-    private String dob;
-    private String address;
-
-    public Info(){
-        name = "NAME";
-        dob = "DOB";
-        address = "ADDRESS";
-    }
-
-    public Info(String Name, String Dob, String Address){
-        name = Name;
-        dob = Dob;
-        address = Address;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getDob() {
-        return dob;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setDob(String dob) {
-        this.dob = dob;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-}
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class MainActivity extends AppCompatActivity {
-
-    private  ArrayList<Info> infoList = new ArrayList<Info>();
+    private List<Hero> heroes;
     private RecyclerView mRecyclerView;
     private CustomAdapter mAdapter;
 
@@ -62,20 +26,44 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        for (int i = 1; i <= 20; i++) {
-            Info info = new Info();
-            info.setName("NAME" + i);
-            info.setDob("DOB"+i);
-            info.setAddress("ADDRESS"+i);
-            infoList.add(info);
-        }
+        // Building Retrofit object
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        mRecyclerView = findViewById(R.id.recyclerView);
-        mAdapter = new CustomAdapter(this, infoList);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // Create Class of Api Using Retrofit object
+        Api api = retrofit.create(Api.class);
 
-        DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL);
-        mRecyclerView.addItemDecoration(mDividerItemDecoration);
+        // Make Call
+        Call<List<Hero>> call = api.getHeroes();
+
+        // Place Call
+        call.enqueue(new Callback<List<Hero>>() {
+            @Override
+            public void onResponse(Call<List<Hero>> call, Response<List<Hero>> response) {
+                heroes = response.body();
+                // Trying to increase no of data by making copy of it
+                heroes.addAll(heroes);
+                heroes.addAll(heroes);
+                heroes.addAll(heroes);
+
+                //Adding Recycler View
+                mRecyclerView = findViewById(R.id.recyclerView);
+                mAdapter = new CustomAdapter(MainActivity.this, heroes);
+                mRecyclerView.setAdapter(mAdapter);
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+
+                // Adding a line divider between each item
+                DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL);
+                mRecyclerView.addItemDecoration(mDividerItemDecoration);
+            }
+
+            @Override
+            public void onFailure(Call<List<Hero>> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Some Error Occurred: Retry", Toast.LENGTH_SHORT ).show();
+            }
+        });
+
     }
 }
