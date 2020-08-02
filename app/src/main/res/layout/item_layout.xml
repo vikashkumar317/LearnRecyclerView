@@ -1,81 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<com.chauthai.swipereveallayout.SwipeRevealLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipelayout"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
-    <ImageView
-        android:id="@+id/heroImageView"
-        android:layout_width="130dp"
-        android:layout_height="100dp"
-        android:src="@drawable/bird"
-        android:scaleType="centerCrop"/>
+    app:dragEdge="right"
+    app:mode="same_level">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:orientation="horizontal">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/nameTextView"
-                android:textSize="20dp"
-                android:singleLine="true"
-                android:layout_toLeftOf="@id/numberTextView"
-                android:textStyle="bold"
-                android:text="NAME"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/numberTextView"
-                android:layout_alignParentRight="true"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:text="0"/>
-
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/teamTextView"
-            android:singleLine="true"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:text="TEAM NAME"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/publisherTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:text="PUBLISHER NAME"
-                android:layout_toLeftOf="@id/singleCheckBox"
-                android:textSize="20dp"
-                />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="?android:attr/starStyle"
-                android:id="@+id/singleCheckBox"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"/>
-
-
-        </RelativeLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/saveBtn"
+            android:text="save"
+            android:textSize="20sp"
+            android:background="@color/colorAccent"
+            android:textColor="@color/colorPrimary" />
 
     </LinearLayout>
 
-</LinearLayout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/heroImageView"
+            android:layout_width="130dp"
+            android:layout_height="100dp"
+            android:src="@drawable/bird"
+            android:scaleType="centerCrop"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/nameTextView"
+                    android:textSize="20sp"
+                    android:singleLine="true"
+                    android:layout_toLeftOf="@id/numberTextView"
+                    android:textStyle="bold"
+                    android:text="NAME"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/numberTextView"
+                    android:layout_alignParentRight="true"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:text="0"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/teamTextView"
+                android:singleLine="true"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="TEAM NAME"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/publisherTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="PUBLISHER NAME"
+                    android:layout_toLeftOf="@id/singleCheckBox"
+                    android:textSize="20sp"
+                    />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?android:attr/starStyle"
+                    android:id="@+id/singleCheckBox"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"/>
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.chauthai.swipereveallayout.SwipeRevealLayout>
